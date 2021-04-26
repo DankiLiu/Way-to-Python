@@ -1,0 +1,14 @@
+import numpy as np
+import pandas as pd
+
+import scipy
+import sklearn
+import keras
+from keras.models import Sequential
+
+import cv2
+import matplotlib.pyplot as plt
+from skimage import io
+
+# Data downloaded from https://www.kaggle.com/c/dogs-vs-cats/data?select=train.zip
+
