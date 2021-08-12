@@ -4,7 +4,7 @@ import pygame
 from pygame.sprite import Group
 from settings import Settings
 from ship import Ship
-from draw_character import DrawCharacter
+from alien import Alien
 
 import game_functions as gf
 
@@ -21,7 +21,10 @@ def run_game():
     ship = Ship(screen=screen, ai_settings=ai_settings)
     # Make a group to store bullets in.
     bullets = Group()
+    aliens = Group()
 
+    # Create the fleet of aliens
+    gf.create_fleet(ai_settings, screen, aliens, ship)
     """
     # Import a character
     cat = DrawCharacter(image="images/cat.png",
@@ -37,10 +40,11 @@ def run_game():
                         bullets=bullets)
         ship.update()
         gf.update_bullets(bullets=bullets)
+        gf.update_aliens(ai_settings=ai_settings, aliens=aliens)
         gf.update_screen(ai_settings=ai_settings,
                          screen=screen,
                          ship=ship,
+                         aliens=aliens,
                          bullets=bullets)
-
 
 run_game()
