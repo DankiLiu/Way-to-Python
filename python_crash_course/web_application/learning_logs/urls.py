@@ -12,5 +12,8 @@ urlpatterns = [
 
     # Show all learning projects
     # url(r'^projects/$', views.projects, name='projects'),
-    url('projects/', views.projects, name='projects'),
+    url(r'projects/$', views.projects, name='projects'),
+
+    # Detail page for a singe project
+    url(r'^projects/(?P<project_id>\d+)/$', views.project, name='project')
 ]

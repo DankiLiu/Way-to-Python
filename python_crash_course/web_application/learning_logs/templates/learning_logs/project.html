@@ -1,0 +1,15 @@
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+    <p>Project: {{project}}</p>
+
+    <p> Entries: </p>
+    <ul>
+        {% for entry in entries %}
+        <li>{{entry.date_added|date:'M d, Y H:i'}}</li>
+        <li>{{entry.entry_name|linebreaks}}</li>
+        {% empty %}
+        <li> </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
