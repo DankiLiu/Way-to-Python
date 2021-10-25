@@ -29,3 +29,9 @@ def project(request, project_id):
     context = {'project': project,
                'entries': entries}
     return render(request, 'learning_logs/project.html', context)
+
+
+def new_project(request):
+    """The page for adding new project"""
+    print("http response from new project function")
+    return render(request, 'learning_logs/new_project.html')

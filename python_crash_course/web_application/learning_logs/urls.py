@@ -15,5 +15,8 @@ urlpatterns = [
     url(r'projects/$', views.projects, name='projects'),
 
     # Detail page for a singe project
-    url(r'^projects/(?P<project_id>\d+)/$', views.project, name='project')
+    url(r'^projects/(?P<project_id>\d+)/$', views.project, name='project'),
+
+    # Page for adding a new project
+    url(r'^new_project/$', views.new_topic, name='new_topic'),
 ]
