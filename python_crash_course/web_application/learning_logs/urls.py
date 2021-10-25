@@ -18,5 +18,8 @@ urlpatterns = [
     url(r'^projects/(?P<project_id>\d+)/$', views.project, name='project'),
 
     # Page for adding a new project
-    url(r'^new_project/$', views.new_topic, name='new_topic'),
+    url(r'^new_project/$', views.new_project, name='new_project'),
+
+    # Page for adding a new entry
+    url(r'^new_entry/(?P<project_id>\d+)/$', views.new_entry, name='new_entry'),
 ]

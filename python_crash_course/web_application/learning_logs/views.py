@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from .models import Project
+from .forms import ProjectForm, EntryForm
 
 
 def index(request):
@@ -32,6 +35,41 @@ def project(request, project_id):
 
 
 def new_project(request):
-    """The page for adding new project"""
+    """The page for adding a new project"""
     print("http response from new project function")
-    return render(request, 'learning_logs/new_project.html')
+    if request.method != 'POST':
+        # No data submitted; create a blank form
+        print("Get")
+        form = ProjectForm()
+    else:
+        # POST data submitted; process data
+        print("Post")
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            print("is valid")
+            form.save()
+            return HttpResponseRedirect(reverse('projects'))
+    context = {'form:': form}
+    return render(request, 'learning_logs/new_project.html', context)
+
+
+def new_entry(request, project_id):
+    """The page for adding a new entry"""
+    print("http response from new entry function")
+    project = Project.objects.get(id=project_id)
+    if request.method != 'POST':
+        # No data submitted; create a blank form
+        print("Get")
+        form = EntryForm()
+    else:
+        # POST data submitted; process data
+        print("Post")
+        form = EntryForm(request.POST)
+        if form.is_valid():
+            print("is valid")
+            new_entry = form.save(commit=False)
+            new_entry.project = project
+            new_entry.save()
+            return HttpResponseRedirect(reverse('project', args=[project_id]))
+    context = {'project': project, 'form:': form}
+    return render(request, 'learning_logs/new_entry.html', context)

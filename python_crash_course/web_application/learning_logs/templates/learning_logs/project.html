@@ -6,10 +6,12 @@
     <p> Entries: </p>
     <ul>
         {% for entry in entries %}
-        <li>{{entry.date_added|date:'M d, Y H:i'}}</li>
-        <li>{{entry.entry_name|linebreaks}}</li>
+        <li><b>[{{entry.date_added|date:'M d, Y H:i'}}]</b> {{entry.entry_name|linebreaks}}</li>
         {% empty %}
         <li> </li>
         {% endfor %}
     </ul>
-{% endblock content %}
+
+    <a href="{% url 'new_project'%}">Add a new project</a>
+    <a href="{% url 'new_entry' project.id%}">Add a new entry</a>
+{% endblock %}
