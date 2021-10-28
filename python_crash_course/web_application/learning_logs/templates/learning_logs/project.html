@@ -7,11 +7,15 @@
     <ul>
         {% for entry in entries %}
         <li><b>[{{entry.date_added|date:'M d, Y H:i'}}]</b> {{entry.entry_name|linebreaks}}</li>
+        <p>
+            <a href="{% url 'learning_logs:edit_entry' entry.id%}">Edit entry</a>
+        </p>
         {% empty %}
         <li> </li>
         {% endfor %}
     </ul>
 
-    <a href="{% url 'new_project'%}">Add a new project</a>
-    <a href="{% url 'new_entry' project.id%}">Add a new entry</a>
+    <a href="{% url 'learning_logs:new_project'%}">Add a new project</a>
+    <a href="{% url 'learning_logs:new_entry' project.id%}">Add a new entry</a>
+
 {% endblock %}

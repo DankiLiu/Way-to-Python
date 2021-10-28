@@ -3,7 +3,7 @@
 {% block content %}
 
 <p>Add a new entry</p>
-    <form action="{% url 'new_project'%}" method='post'>
+    <form action="{% url 'learning_logs:new_project'%}" method='post'>
         {% csrf_token %}
         <p>
             <label for="id_project_name">Project name:</label>

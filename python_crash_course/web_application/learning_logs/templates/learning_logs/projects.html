@@ -6,7 +6,7 @@
     <ul>
         {% for project in projects %}
             <li>
-                <a href="{% url 'project' project.id %}">{{project}}</a>
+                <a href="{% url 'learning_logs:project' project.id %}">{{project}}</a>
             </li>
         {% empty %}
             <li>No projects have been added yet.</li>

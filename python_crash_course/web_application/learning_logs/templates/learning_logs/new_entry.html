@@ -2,13 +2,13 @@
 
 {% block content %}
     <p>
-        Debug: <a href="{% url 'new_entry' project.id%}">danki</a>
+        Debug: <a href="{% url 'learning_logs:new_entry' project.id%}">danki</a>
     </p>
 
-    <p><a href="{% url 'project' project.id%}">{{ project }}</a></p>
+    <p><a href="{% url 'learning_logs:project' project.id%}">{{ project }}</a></p>
 
     <p>Add a new Entry</p>
-    <form action="{% url 'new_entry' project.id%}" method="post">
+    <form action="{% url 'learning_logs:new_entry' project.id%}" method="post">
         {% csrf_token %}
         <p>
             <label for="id_entry_name">Entry name:</label>

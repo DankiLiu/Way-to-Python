@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from .models import Project
+from .models import Project, Entry
 from .forms import ProjectForm, EntryForm
 
 
@@ -48,7 +48,7 @@ def new_project(request):
         if form.is_valid():
             print("is valid")
             form.save()
-            return HttpResponseRedirect(reverse('projects'))
+            return HttpResponseRedirect(reverse('learning_logs:projects'))
     context = {'form:': form}
     return render(request, 'learning_logs/new_project.html', context)
 
@@ -70,6 +70,26 @@ def new_entry(request, project_id):
             new_entry = form.save(commit=False)
             new_entry.project = project
             new_entry.save()
-            return HttpResponseRedirect(reverse('project', args=[project_id]))
+            return HttpResponseRedirect(reverse('learning_logs:project', args=[project_id]))
     context = {'project': project, 'form:': form}
     return render(request, 'learning_logs/new_entry.html', context)
+
+
+def edit_entry(request, entry_id):
+    """The page for editing a entry"""
+    entry = Entry.objects.get(id=entry_id)
+    project = entry.project
+
+    if request.method != 'POST':
+        # Initial request; prefill form with the current entry
+        form = EntryForm(instance=entry)
+    else:
+        # POST data submitted; process data
+        form = EntryForm(instance=entry, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('learning_logs:project', args=[project.id]))
+    context = {'entry': entry,
+               'project': project,
+               'form': form}
+    return render(request, 'learning_logs/edit_entry.html', context)
