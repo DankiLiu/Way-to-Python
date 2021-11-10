@@ -6,10 +6,12 @@
     <ul>
         {% for project in projects %}
             <li>
-                <a href="{% url 'learning_logs:project' project.id %}">{{project}}</a>
+                <a href="{% url 'learning_logs:project' project.id %}">
+                    {{project}}</a>
             </li>
         {% empty %}
             <li>No projects have been added yet.</li>
         {% endfor %}
+        <a href="{% url 'learning_logs:new_project'%}">Add a new project</a>
     </ul>
 {% endblock content %}
