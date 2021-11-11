@@ -1,17 +1,25 @@
 {% extends "learning_logs/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+    <h1>Leaarning Projects</h1>
+{% endblock header %}
 
 {% block content %}
-    <p>Learning project</p>
-
     <ul>
         {% for project in projects %}
             <li>
-                <a href="{% url 'learning_logs:project' project.id %}">
-                    {{project}}</a>
+                <h3>
+                    <a href="{% url 'learning_logs:project' project.id %}">
+                        {{project}}
+                    </a>
+                </h3>
             </li>
         {% empty %}
             <li>No projects have been added yet.</li>
         {% endfor %}
-        <a href="{% url 'learning_logs:new_project'%}">Add a new project</a>
     </ul>
+    <h3>
+        <a href="{% url 'learning_logs:new_project' %}">Add new project</a>
+    </h3>
 {% endblock content %}
